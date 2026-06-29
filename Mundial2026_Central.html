@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏆 Mundial 2026 — REMAX Norte Agrourbano</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --red: #C8102E; --blue: #003DA5; --dark: #1A1A2E;
+  --cream: #F2EFE9; --white: #FFFFFF; --border: #E0DDD8;
+  --text: #1A1A2E; --muted: #888899; --shadow: rgba(0,61,165,0.10);
+  --green: #1A7A3A; --light-green: #E8F5ED;
+  --gold: #B8860B; --light-gold: #FFF8E1;
+}
+body { background: var(--cream); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; }
+
+/* ── HERO ─────────────────────────────────── */
+.hero { position: relative; text-align: center; padding: 46px 20px 32px; overflow: hidden; background: var(--white); border-bottom: 3px solid var(--border); }
+.hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,16,46,.07) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 50% 100%, rgba(0,61,165,.05) 0%, transparent 70%);
+}
+.trophy { font-size: clamp(36px,6vw,64px); display: block; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px,9vw,90px); letter-spacing: 4px; line-height: 1;
+  background: linear-gradient(135deg, var(--red) 0%, var(--blue) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin: 8px 0 4px;
+}
+.hero-sub { font-family:'Bebas Neue',sans-serif; font-size:clamp(14px,3vw,26px); letter-spacing:8px; color:var(--muted); margin-bottom:16px; }
+.hero-badge {
+  display:inline-block; background:linear-gradient(135deg,var(--red),#8B0000);
+  color:#fff; font-weight:700; font-size:12px; letter-spacing:2px;
+  padding:5px 18px; border-radius:20px; text-transform:uppercase;
+}
+
+/* ── STATS ────────────────────────────────── */
+.stats { display:flex; justify-content:center; flex-wrap:wrap; background:var(--white); border-bottom:2px solid var(--border); }
+.stat { text-align:center; padding:18px 28px; border-right:1px solid var(--border); flex:1; min-width:80px; }
+.stat:last-child { border-right:none; }
+.stat-num { font-family:'Bebas Neue',sans-serif; font-size:34px; line-height:1; }
+.c-red  { color:var(--red); }
+.c-blue { color:var(--blue); }
+.c-grn  { color:var(--green); }
+.c-gld  { color:var(--gold); }
+.c-muted{ color:#888; }
+.stat-label { font-size:10px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-top:3px; }
+
+/* ── TAB NAV ──────────────────────────────── */
+.tabs { display:flex; justify-content:center; gap:0; background:var(--white); border-bottom:2px solid var(--border); }
+.tab-btn {
+  font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:3px;
+  padding:16px 36px; cursor:pointer; border:none; background:none;
+  color:var(--muted); border-bottom:3px solid transparent; transition:all .2s;
+  position:relative; top:2px;
+}
+.tab-btn:hover { color:var(--dark); }
+.tab-btn.active { color:var(--red); border-bottom-color:var(--red); }
+
+/* ── SECTION HEADING ─────────────────────── */
+.section-title {
+  font-family:'Bebas Neue',sans-serif; font-size:clamp(18px,3.5vw,28px); letter-spacing:3px;
+  color:var(--dark); padding:20px 24px 4px; max-width:1400px; margin:0 auto;
+  display:flex; align-items:center; gap:12px;
+}
+.section-title::after { content:''; flex:1; height:2px; background:linear-gradient(90deg,var(--border),transparent); }
+
+/* ── CONTROLS ────────────────────────────── */
+.controls { display:flex; align-items:center; justify-content:center; gap:10px; padding:20px 20px 12px; flex-wrap:wrap; }
+.search-wrap { position:relative; }
+.search-wrap::before { content:'🔍'; position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:13px; pointer-events:none; }
+input[type=search] {
+  background:var(--white); border:1.5px solid var(--border); border-radius:8px;
+  color:var(--text); font-size:14px; padding:10px 14px 10px 36px; width:220px;
+  outline:none; transition:border-color .2s; box-shadow:0 2px 8px var(--shadow);
+}
+input[type=search]:focus { border-color:var(--red); }
+.filter-btn {
+  background:var(--white); border:1.5px solid var(--border); border-radius:8px;
+  color:var(--muted); cursor:pointer; font-size:11px; font-weight:700; letter-spacing:1px;
+  padding:10px 13px; text-transform:uppercase; transition:all .2s; box-shadow:0 2px 6px var(--shadow);
+}
+.filter-btn:hover { border-color:var(--blue); color:var(--blue); background:#EEF3FF; }
+.filter-btn.active    { border-color:var(--red);   color:#fff; background:var(--red); }
+.filter-btn.f-win     { border-color:var(--green);  color:#fff; background:var(--green); }
+.filter-btn.f-draw    { border-color:#888;           color:#fff; background:#888; }
+.filter-btn.f-live    { border-color:var(--gold);   color:#fff; background:var(--gold); }
+
+/* ── SORTEO GRID ─────────────────────────── */
+.sorteo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(275px,1fr)); gap:14px; padding:12px 24px 40px; max-width:1400px; margin:0 auto; }
+.scard { background:var(--white); border:1.5px solid var(--border); border-radius:14px; overflow:hidden; transition:transform .2s,box-shadow .2s,border-color .2s; position:relative; box-shadow:0 3px 12px var(--shadow); opacity:0; animation:reveal .4s forwards; }
+.scard:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,61,165,.15); border-color:var(--blue); }
+.scard.hidden { display:none; }
+.scard-accent { height:4px; }
+.scard-body { padding:16px 18px 12px; display:flex; align-items:center; gap:12px; }
+.scard-flag { font-size:40px; flex-shrink:0; filter:drop-shadow(0 2px 4px rgba(0,0,0,.15)); }
+.scard-info { flex:1; min-width:0; }
+.scard-country { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:1px; line-height:1.1; color:var(--dark); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.scard-name { font-size:12px; color:var(--muted); margin-top:3px; }
+.scard-footer { display:flex; align-items:center; justify-content:space-between; padding:8px 18px 12px; border-top:1px solid var(--border); background:#FAFAF8; }
+.scard-rank { font-family:'Bebas Neue',sans-serif; font-size:13px; color:var(--blue); letter-spacing:1px; }
+.scard-pts { font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:1px; }
+.pts-green { color:var(--green); }
+.pts-muted { color:#ccc; }
+.scard-conf { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:3px 9px; border-radius:20px; color:#fff; }
+.scard-num { position:absolute; top:11px; right:13px; font-family:'Bebas Neue',sans-serif; font-size:13px; color:#CCC; }
+
+.conf-UEFA     { background:#003DA5; }
+.conf-CONMEBOL { background:#C8102E; }
+.conf-CAF      { background:#8B4513; }
+.conf-AFC      { background:#1A6B3A; }
+.conf-CONCACAF { background:#6A0DAD; }
+.conf-OFC      { background:#007B8A; }
+.acc-elim      { background:linear-gradient(90deg,#999,#ccc); }
+.scard-elim    { opacity:.6; filter:grayscale(.5); }
+.scard-elim:hover { transform:none; box-shadow:0 3px 12px var(--shadow); border-color:var(--border); }
+.sbadge { font-size:10px; font-weight:700; letter-spacing:1px; padding:2px 8px; border-radius:10px; }
+.badge-elim   { background:#FFE5E5; color:#C8102E; }
+.badge-clasif { background:var(--light-green); color:var(--green); }
+.badge-live   { background:#EEF3FF; color:var(--blue); }
+.acc-UEFA      { background:linear-gradient(90deg,#003DA5,#4A7FD4); }
+.acc-CONMEBOL  { background:linear-gradient(90deg,#C8102E,#FF4560); }
+.acc-CAF       { background:linear-gradient(90deg,#C8860A,#E8A020); }
+.acc-AFC       { background:linear-gradient(90deg,#1A6B3A,#2ECC71); }
+.acc-CONCACAF  { background:linear-gradient(90deg,#6A0DAD,#9B59B6); }
+.acc-OFC       { background:linear-gradient(90deg,#007B8A,#1ABC9C); }
+
+/* ── MATCH GRID ──────────────────────────── */
+.match-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:13px; padding:12px 24px 10px; max-width:1400px; margin:0 auto; }
+.mcard { background:var(--white); border:1.5px solid var(--border); border-radius:14px; overflow:hidden; transition:transform .2s,box-shadow .2s,border-color .2s; box-shadow:0 3px 12px var(--shadow); opacity:0; animation:reveal .4s forwards; }
+.mcard:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(0,61,165,.13); border-color:var(--blue); }
+.mcard.hidden { display:none; }
+.mcard-top { height:4px; }
+.top-win  { background:linear-gradient(90deg,#1A7A3A,#2ECC71); }
+.top-draw { background:linear-gradient(90deg,#888,#bbb); }
+.top-live { background:linear-gradient(90deg,#B8860B,#F0B429); animation:pulse-bar 1.5s ease-in-out infinite alternate; }
+@keyframes pulse-bar { from{opacity:.6} to{opacity:1} }
+.mcard-header { display:flex; justify-content:space-between; align-items:center; padding:9px 15px 5px; }
+.mcard-date { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--muted); text-transform:uppercase; }
+.mcard-group { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:2px; color:var(--blue); }
+.mcard-score { display:flex; align-items:center; justify-content:space-between; padding:5px 15px 9px; gap:6px; }
+.mcard-team { display:flex; flex-direction:column; align-items:center; gap:3px; flex:1; }
+.mcard-flag { font-size:32px; line-height:1; filter:drop-shadow(0 2px 4px rgba(0,0,0,.12)); }
+.mcard-tname { font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:1px; text-align:center; color:var(--dark); line-height:1.1; }
+.mcard-tname.winner { color:var(--green); }
+.mcard-tname.loser  { color:var(--muted); }
+.score-center { display:flex; flex-direction:column; align-items:center; gap:4px; min-width:60px; }
+.score-nums { font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--dark); letter-spacing:2px; line-height:1; }
+.score-sep { color:var(--muted); }
+.score-status { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:2px 9px; border-radius:12px; }
+.s-win  { background:var(--light-green); color:var(--green); }
+.s-draw { background:#F0F0F0; color:#666; }
+.s-live { background:var(--light-gold); color:var(--gold); animation:blink .9s ease-in-out infinite alternate; }
+@keyframes blink { from{opacity:.6} to{opacity:1} }
+.mcard-footer { border-top:1px solid var(--border); background:#FAFAF8; padding:8px 15px; display:flex; align-items:center; justify-content:space-between; }
+.mcard-pts { font-size:11px; font-weight:700; }
+.pts-pos  { color:var(--green); }
+.pts-none { color:var(--muted); }
+.mcard-owner { font-size:10px; color:var(--muted); text-align:right; max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+/* ── WINNERS GRID ────────────────────────── */
+.winners-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(255px,1fr)); gap:13px; padding:12px 24px 36px; max-width:1400px; margin:0 auto; }
+.wcard { background:var(--white); border:1.5px solid var(--border); border-radius:14px; overflow:hidden; transition:transform .2s,box-shadow .2s; box-shadow:0 3px 12px var(--shadow); opacity:0; animation:reveal .4s forwards; }
+.wcard:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(26,122,58,.18); border-color:var(--green); }
+.wcard-accent { height:4px; background:linear-gradient(90deg,#1A7A3A,#2ECC71); }
+.wcard-body { padding:14px 16px 10px; display:flex; align-items:center; gap:10px; }
+.wcard-flag { font-size:36px; filter:drop-shadow(0 2px 4px rgba(0,0,0,.12)); }
+.wcard-info { flex:1; }
+.wcard-country { font-family:'Bebas Neue',sans-serif; font-size:19px; letter-spacing:1px; color:var(--dark); }
+.wcard-owner { font-size:11px; color:var(--muted); margin-top:2px; }
+.wcard-pts { font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--green); line-height:1; }
+.wcard-pts-label { font-size:10px; color:var(--muted); letter-spacing:1px; }
+.wcard-footer { display:flex; align-items:center; justify-content:space-between; padding:7px 16px 10px; border-top:1px solid var(--border); background:#FAFAF8; }
+
+/* ── ELIMINADOS ──────────────────────────── */
+.filter-btn.f-elim { border-color:#C8102E; color:#C8102E; }
+.filter-btn.f-elim.active-elim { background:#C8102E; color:#fff; border-color:#C8102E; }
+.elim-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; padding:12px 24px 36px; max-width:1400px; margin:0 auto; }
+.ecard { background:var(--white); border:1.5px solid #F5C6C6; border-radius:14px; overflow:hidden; box-shadow:0 3px 12px rgba(200,16,46,.07); opacity:0; animation:reveal .4s forwards; }
+.ecard-top { height:4px; background:linear-gradient(90deg,#C8102E,#FF6B6B); }
+.ecard-body { padding:14px 16px 10px; display:flex; align-items:center; gap:12px; }
+.ecard-flag { font-size:38px; filter:grayscale(.4) drop-shadow(0 2px 4px rgba(0,0,0,.1)); }
+.ecard-info { flex:1; }
+.ecard-country { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; color:#999; }
+.ecard-name { font-size:12px; color:var(--muted); margin-top:2px; }
+.ecard-pts { font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--muted); }
+.ecard-pts-label { font-size:10px; color:#ccc; letter-spacing:1px; }
+.ecard-footer { display:flex; align-items:center; justify-content:space-between; padding:7px 16px 10px; border-top:1px solid #F5C6C6; background:#FFF8F8; }
+.ecard-group { font-size:11px; color:#bbb; }
+.ebadge { font-size:10px; font-weight:700; letter-spacing:1.5px; background:#FFE5E5; color:#C8102E; padding:3px 9px; border-radius:20px; }
+.ebadge-pts { background:#FFF3CD; color:#856404; }
+.wcard-rival { font-size:11px; color:var(--muted); }
+.wbadge { font-size:10px; font-weight:700; letter-spacing:1.5px; background:var(--light-green); color:var(--green); padding:3px 9px; border-radius:20px; }
+
+@keyframes reveal { to { opacity:1; } }
+
+/* ── TABS VISIBILITY ─────────────────────── */
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* ── FOOTER ──────────────────────────────── */
+footer { text-align:center; padding:22px 20px; color:var(--muted); font-size:12px; border-top:2px solid var(--border); background:var(--white); letter-spacing:1px; }
+footer strong { color:var(--red); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="trophy">🏆</span>
+  <h1 class="hero-title">MUNDIAL 2026</h1>
+  <p class="hero-sub">Sorteo · Oficina</p>
+  <span class="hero-badge">🇺🇸 🇨🇦 🇲🇽 &nbsp;REMAX NORTE AGROURBANO</span>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num c-red">40</div><div class="stat-label">Participantes</div></div>
+  <div class="stat"><div class="stat-num c-blue">72</div><div class="stat-label">Partidos Jugados</div></div>
+  <div class="stat"><div class="stat-num c-grn">32</div><div class="stat-label">Clasificados 16avos</div></div>
+  <div class="stat"><div class="stat-num" style="color:#C8102E">16</div><div class="stat-label">Eliminados</div></div>
+  <div class="stat"><div class="stat-num c-gld">29 Jun</div><div class="stat-label">16avos Inicio</div></div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('sorteo',this)">🎯 SORTEO</button>
+  <button class="tab-btn" onclick="switchTab('resultados',this)">⚽ RESULTADOS</button>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- TAB: SORTEO                               -->
+<!-- ══════════════════════════════════════════ -->
+<div id="panel-sorteo" class="tab-panel active">
+  <div class="controls">
+    <div class="search-wrap">
+      <input type="search" id="searchInput" placeholder="Buscar nombre o país…" oninput="filterCards()">
+    </div>
+    <button class="filter-btn active" onclick="filterConf('ALL',this)">Todos</button>
+    <button class="filter-btn" onclick="filterConf('UEFA',this)">UEFA</button>
+    <button class="filter-btn" onclick="filterConf('CONMEBOL',this)">CONMEBOL</button>
+    <button class="filter-btn" onclick="filterConf('CAF',this)">CAF</button>
+    <button class="filter-btn" onclick="filterConf('AFC',this)">AFC</button>
+    <button class="filter-btn" onclick="filterConf('CONCACAF',this)">CONCACAF</button>
+    <button class="filter-btn" onclick="filterConf('OFC',this)">OFC</button>
+  </div>
+  <div class="sorteo-grid" id="sorteo-grid"></div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- TAB: RESULTADOS                           -->
+<!-- ══════════════════════════════════════════ -->
+<div id="panel-resultados" class="tab-panel">
+  <div class="controls">
+    <button class="filter-btn active" onclick="filterMatches('ALL',this)">Todos</button>
+    <button class="filter-btn" onclick="filterMatches('WIN',this)">✅ Victorias</button>
+    <button class="filter-btn" onclick="filterMatches('DRAW',this)">➖ Empates</button>
+    <button class="filter-btn" onclick="filterMatches('LIVE',this)">🔴 En curso</button>
+    <button class="filter-btn f-elim" onclick="showElim(this)" id="btn-elim">❌ ELIMINADOS</button>
+  </div>
+
+  <!-- PARTIDOS + TABLA (se ocultan al ver eliminados) -->
+  <div id="res-main">
+    <div class="section-title">PARTIDOS JUGADOS</div>
+    <div class="match-grid" id="match-grid"></div>
+    <div class="section-title" style="margin-top:16px">TABLA DEL SORTEO · PUNTOS FASE DE GRUPOS — FINAL (29 Jun)</div>
+    <div class="winners-grid" id="winners-grid"></div>
+  </div>
+
+  <!-- ELIMINADOS -->
+  <div id="elim-section" style="display:none">
+    <div class="section-title">PARTICIPANTES ELIMINADOS — REENGANCHE DISPONIBLE</div>
+    <div class="elim-grid" id="elim-grid"></div>
+  </div>
+</div>
+
+<footer>🏆 Mundial 2026 · <strong>REMAX NORTE AGROURBANO</strong> · Sorteo de Oficina · Fase de grupos completa · 29 Jun 2026 · 16avos en curso</footer>
+
+<script>
+/* ── DATA: SORTEO ───────────────────────────── */
+const sorteoData = [
+  {num:1,  name:"Stefan Fleig",        flag:"🇪🇬", country:"Egipto",            rank:29, conf:"CAF"},
+  {num:2,  name:"Ibrahim Abdev",        flag:"🇦🇺", country:"Australia",         rank:27, conf:"AFC"},
+  {num:3,  name:"Yoselin Rodriguez",    flag:"🇳🇿", country:"Nueva Zelanda",     rank:85, conf:"OFC"},
+  {num:4,  name:"Nikcole Rojas",        flag:"🇲🇦", country:"Marruecos",         rank:28, conf:"CAF"},
+  {num:5,  name:"Stephany Saavedra",    flag:"🇧🇷", country:"Brasil",            rank:6,  conf:"CONMEBOL"},
+  {num:6,  name:"Jairo Rojas",          flag:"🇵🇹", country:"Portugal",          rank:5,  conf:"UEFA"},
+  {num:7,  name:"Fabrizio Amelunge",    flag:"🇲🇽", country:"México",            rank:15, conf:"CONCACAF"},
+  {num:8,  name:"Ricardo Moro",         flag:"🇳🇴", country:"Noruega",           rank:31, conf:"UEFA"},
+  {num:9,  name:"Aldo Velasco",         flag:"🇨🇮", country:"Costa de Marfil",  rank:34, conf:"CAF"},
+  {num:10, name:"Karina Vaca Pereira",  flag:"🇪🇸", country:"España",            rank:2,  conf:"UEFA"},
+  {num:11, name:"Pablo Barrientos",     flag:"🇺🇸", country:"Estados Unidos",    rank:16, conf:"CONCACAF"},
+  {num:12, name:"Julio Pinto",          flag:"🇨🇭", country:"Suiza",             rank:19, conf:"UEFA"},
+  {num:13, name:"Oscar Careaga",        flag:"🇰🇷", country:"Corea del Sur",    rank:25, conf:"AFC"},
+  {num:14, name:"Saul Ortiz",           flag:"🇸🇪", country:"Suecia",            rank:38, conf:"UEFA"},
+  {num:15, name:"Fernando Montenegro",  flag:"🇮🇷", country:"Irán",              rank:21, conf:"AFC"},
+  {num:16, name:"Dora Vaca",            flag:"🇯🇵", country:"Japón",             rank:18, conf:"AFC"},
+  {num:17, name:"Nancy Perez",          flag:"🇨🇴", country:"Colombia",          rank:13, conf:"CONMEBOL"},
+  {num:18, name:"Claudia Ucedo",        flag:"🇦🇷", country:"Argentina",         rank:3,  conf:"CONMEBOL"},
+  {num:19, name:"Fabio Vega",           flag:"🇸🇳", country:"Senegal",           rank:14, conf:"CAF"},
+  {num:20, name:"Jaqueline Bell",       flag:"🇳🇱", country:"Países Bajos",     rank:65, conf:"UEFA"},
+  {num:21, name:"Fiorela Seoane",       flag:"🇭🇷", country:"Croacia",           rank:11, conf:"UEFA"},
+  {num:22, name:"Pamela Pinto",         flag:"🇬🇭", country:"Ghana",             rank:74, conf:"CAF"},
+  {num:23, name:"Juan Tavolara",        flag:"🇦🇹", country:"Austria",           rank:24, conf:"UEFA"},
+  {num:24, name:"Miolet Padilla",       flag:"🇹🇳", country:"Túnez",             rank:44, conf:"CAF"},
+  {num:25, name:"Adelita Eguez",        flag:"🇨🇻", country:"Cabo Verde",        rank:69, conf:"CAF"},
+  {num:26, name:"Ana Luz Caballero",    flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿", country:"Escocia",           rank:43, conf:"UEFA"},
+  {num:27, name:"Humberto Villena",     flag:"🇶🇦", country:"Qatar",             rank:55, conf:"AFC"},
+  {num:28, name:"Ma Rene Rocabado",     flag:"🇩🇪", country:"Alemania",          rank:10, conf:"UEFA"},
+  {num:29, name:"Gabriela Pedraza",     flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿", country:"Inglaterra",        rank:4,  conf:"UEFA"},
+  {num:30, name:"Sonia Antelo",         flag:"🇧🇪", country:"Bélgica",           rank:9,  conf:"UEFA"},
+  {num:31, name:"Daniel Carvajal",      flag:"🇹🇷", country:"Turquía",           rank:22, conf:"UEFA"},
+  {num:32, name:"Alejandro Pastrana",   flag:"🇫🇷", country:"Francia",           rank:1,  conf:"UEFA"},
+  {num:33, name:"Tatiana Eguez",        flag:"🇺🇾", country:"Uruguay",           rank:17, conf:"CONMEBOL"},
+  {num:34, name:"Roberto Gutierrez",    flag:"🇵🇦", country:"Panamá",            rank:33, conf:"CONCACAF"},
+  {num:35, name:"Gabriela Fresco",      flag:"🇵🇾", country:"Paraguay",          rank:40, conf:"CONMEBOL"},
+  {num:36, name:"Sergio Amelunge",      flag:"🇸🇦", country:"Arabia Saudita",   rank:61, conf:"AFC"},
+  {num:37, name:"Dulce Terceros",       flag:"🇺🇿", country:"Uzbekistán",        rank:50, conf:"AFC"},
+  {num:38, name:"Mario Llado",          flag:"🇨🇦", country:"Canadá",            rank:30, conf:"CONCACAF"},
+  {num:39, name:"Mariela Amelunge",     flag:"🇨🇩", country:"RD Congo",          rank:46, conf:"CAF"},
+  {num:40, name:"Diego Bravo",          flag:"🇿🇦", country:"Sudáfrica",         rank:60, conf:"CAF"},
+];
+
+/* Puntos sorteo por selección (3 pts por victoria) — actualizado 29 Jun — fase de grupos completa */
+const puntosMap = {
+  // 9 pts — 3 victorias
+  "México":9,"Francia":9,"Argentina":9,
+  // 6 pts — 2 victorias
+  "Suiza":6,"Brasil":6,"Marruecos":6,"Estados Unidos":6,
+  "Alemania":6,"Costa de Marfil":6,"Países Bajos":6,
+  "Noruega":6,"Colombia":6,"España":6,"Inglaterra":6,"Croacia":6,
+  // 3 pts — 1 victoria
+  "Corea del Sur":3,"Sudáfrica":3,"Canadá":3,"Escocia":3,
+  "Australia":3,"Paraguay":3,"Turquía":3,"Japón":3,
+  "Suecia":3,"Egipto":3,"Bélgica":3,"Austria":3,
+  "Senegal":3,"Portugal":3,"RD Congo":3,"Ghana":3,
+  // 0 pts — sin victorias (Cabo Verde: 3 empates)
+};
+
+const eliminadosSet = new Set([
+  "Qatar","Túnez","Jordania","Panamá","Uzbekistán","Chequia","Iraq","Haití",
+  "Turquía","Irán","Nueva Zelanda","Uruguay","Arabia Saudita","Escocia","Corea del Sur","Curazao"
+]);
+
+const clasificadosSet = new Set([
+  // Campeones de grupo
+  "México","Suiza","Brasil","Estados Unidos","Alemania","Países Bajos",
+  "Bélgica","España","Francia","Argentina","Colombia","Inglaterra",
+  // Subcampeones
+  "Sudáfrica","Canadá","Marruecos","Australia","Costa de Marfil","Japón",
+  "Egipto","Cabo Verde","Noruega","Austria","Portugal","Croacia",
+  // Mejores terceros
+  "Bosnia Herzegovina","Paraguay","Ecuador","Suecia","Senegal","Algeria","RD Congo","Ghana"
+]);
+
+/* ── DATA: PARTIDOS — actualizado 26 Jun ───── */
+const matches = [
+  // ── JORNADA 1 ──
+  { date:"11 Jun", group:"A", flagH:"🇲🇽", teamH:"México",          gh:2, gv:0, flagV:"🇿🇦", teamV:"Sudáfrica",         type:"WIN",  winner:"México",          ownerW:"Fabrizio Amelunge", ownerL:"Diego Bravo" },
+  { date:"11 Jun", group:"A", flagH:"🇰🇷", teamH:"Corea del Sur",   gh:2, gv:1, flagV:"🇨🇿", teamV:"Chequia",           type:"WIN",  winner:"Corea del Sur",   ownerW:"Oscar Careaga",     ownerL:"—" },
+  { date:"12 Jun", group:"B", flagH:"🇨🇦", teamH:"Canadá",          gh:1, gv:1, flagV:"🇧🇦", teamV:"Bosnia Herz.",      type:"DRAW", winner:null,              ownerW:"Mario Llado",       ownerL:"—" },
+  { date:"13 Jun", group:"B", flagH:"🇶🇦", teamH:"Qatar",           gh:1, gv:1, flagV:"🇨🇭", teamV:"Suiza",             type:"DRAW", winner:null,              ownerW:"Humberto Villena",  ownerL:"Julio Pinto" },
+  { date:"13 Jun", group:"C", flagH:"🇧🇷", teamH:"Brasil",          gh:1, gv:1, flagV:"🇲🇦", teamV:"Marruecos",         type:"DRAW", winner:null,              ownerW:"Stephany Saavedra", ownerL:"Nikcole Rojas" },
+  { date:"13 Jun", group:"C", flagH:"🇺🇸", teamH:"Estados Unidos",  gh:4, gv:1, flagV:"🇵🇾", teamV:"Paraguay",          type:"WIN",  winner:"Estados Unidos",  ownerW:"Pablo Barrientos",  ownerL:"Gabriela Fresco" },
+  { date:"14 Jun", group:"C", flagH:"🇭🇹", teamH:"Haití",           gh:0, gv:1, flagV:"🏴󠁧󠁢󠁳󠁣󠁴󠁿", teamV:"Escocia",            type:"WIN",  winner:"Escocia",         ownerW:"Ana Luz Caballero", ownerL:"—" },
+  { date:"14 Jun", group:"D", flagH:"🇦🇺", teamH:"Australia",       gh:2, gv:0, flagV:"🇹🇷", teamV:"Turquía",           type:"WIN",  winner:"Australia",       ownerW:"Ibrahim Abdev",     ownerL:"Daniel Carvajal" },
+  { date:"14 Jun", group:"E", flagH:"🇩🇪", teamH:"Alemania",        gh:7, gv:1, flagV:"🇨🇼", teamV:"Curazao",           type:"WIN",  winner:"Alemania",        ownerW:"Ma Rene Rocabado",  ownerL:"—" },
+  { date:"14 Jun", group:"E", flagH:"🇨🇮", teamH:"Costa de Marfil", gh:1, gv:0, flagV:"🇪🇨", teamV:"Ecuador",           type:"WIN",  winner:"Costa de Marfil", ownerW:"Aldo Velasco",      ownerL:"—" },
+  { date:"14 Jun", group:"F", flagH:"🇳🇱", teamH:"Países Bajos",    gh:2, gv:2, flagV:"🇯🇵", teamV:"Japón",             type:"DRAW", winner:null,              ownerW:"Jaqueline Bell",    ownerL:"Dora Vaca" },
+  { date:"14 Jun", group:"F", flagH:"🇸🇪", teamH:"Suecia",          gh:5, gv:1, flagV:"🇹🇳", teamV:"Túnez",             type:"WIN",  winner:"Suecia",          ownerW:"Saul Ortiz",        ownerL:"Miolet Padilla" },
+  { date:"15 Jun", group:"G", flagH:"🇧🇪", teamH:"Bélgica",         gh:1, gv:1, flagV:"🇪🇬", teamV:"Egipto",            type:"DRAW", winner:null,              ownerW:"Sonia Antelo",      ownerL:"Stefan Fleig" },
+  { date:"15 Jun", group:"G", flagH:"🇮🇷", teamH:"Irán",            gh:2, gv:2, flagV:"🇳🇿", teamV:"Nueva Zelanda",     type:"DRAW", winner:null,              ownerW:"Fernando Montenegro",ownerL:"Yoselin Rodriguez" },
+  { date:"16 Jun", group:"I", flagH:"🇫🇷", teamH:"Francia",         gh:2, gv:0, flagV:"🇸🇳", teamV:"Senegal",           type:"WIN",  winner:"Francia",         ownerW:"Alejandro Pastrana",ownerL:"Fabio Vega" },
+  { date:"16 Jun", group:"I", flagH:"🇮🇶", teamH:"Iraq",            gh:0, gv:3, flagV:"🇳🇴", teamV:"Noruega",           type:"WIN",  winner:"Noruega",         ownerW:"—",                 ownerL:"Ricardo Moro" },
+  { date:"16 Jun", group:"J", flagH:"🇦🇷", teamH:"Argentina",       gh:2, gv:0, flagV:"🇩🇿", teamV:"Argelia",           type:"WIN",  winner:"Argentina",       ownerW:"Claudia Ucedo",     ownerL:"—" },
+  { date:"16 Jun", group:"J", flagH:"🇦🇹", teamH:"Austria",         gh:2, gv:0, flagV:"🇯🇴", teamV:"Jordania",          type:"WIN",  winner:"Austria",         ownerW:"Juan Tavolara",     ownerL:"—" },
+  // ── JORNADA 2 ──
+  { date:"18 Jun", group:"A", flagH:"🇨🇿", teamH:"Chequia",         gh:1, gv:1, flagV:"🇿🇦", teamV:"Sudáfrica",         type:"DRAW", winner:null,              ownerW:"—",                 ownerL:"Diego Bravo" },
+  { date:"18 Jun", group:"A", flagH:"🇲🇽", teamH:"México",          gh:1, gv:0, flagV:"🇰🇷", teamV:"Corea del Sur",     type:"WIN",  winner:"México",          ownerW:"Fabrizio Amelunge", ownerL:"Oscar Careaga" },
+  { date:"18 Jun", group:"B", flagH:"🇨🇭", teamH:"Suiza",           gh:4, gv:1, flagV:"🇧🇦", teamV:"Bosnia Herz.",      type:"WIN",  winner:"Suiza",           ownerW:"Julio Pinto",       ownerL:"—" },
+  { date:"18 Jun", group:"B", flagH:"🇨🇦", teamH:"Canadá",          gh:6, gv:0, flagV:"🇶🇦", teamV:"Qatar",             type:"WIN",  winner:"Canadá",          ownerW:"Mario Llado",       ownerL:"Humberto Villena" },
+  { date:"19 Jun", group:"C", flagH:"🏴󠁧󠁢󠁳󠁣󠁴󠁿", teamH:"Escocia",         gh:0, gv:1, flagV:"🇲🇦", teamV:"Marruecos",         type:"WIN",  winner:"Marruecos",       ownerW:"Nikcole Rojas",     ownerL:"Ana Luz Caballero" },
+  { date:"19 Jun", group:"C", flagH:"🇧🇷", teamH:"Brasil",          gh:3, gv:0, flagV:"🇭🇹", teamV:"Haití",             type:"WIN",  winner:"Brasil",          ownerW:"Stephany Saavedra", ownerL:"—" },
+  { date:"19 Jun", group:"D", flagH:"🇺🇸", teamH:"Estados Unidos",  gh:2, gv:0, flagV:"🇦🇺", teamV:"Australia",         type:"WIN",  winner:"Estados Unidos",  ownerW:"Pablo Barrientos",  ownerL:"Ibrahim Abdev" },
+  { date:"19 Jun", group:"D", flagH:"🇹🇷", teamH:"Turquía",         gh:0, gv:1, flagV:"🇵🇾", teamV:"Paraguay",          type:"WIN",  winner:"Paraguay",        ownerW:"Gabriela Fresco",   ownerL:"Daniel Carvajal" },
+  { date:"20 Jun", group:"E", flagH:"🇩🇪", teamH:"Alemania",        gh:2, gv:1, flagV:"🇨🇮", teamV:"Costa de Marfil",   type:"WIN",  winner:"Alemania",        ownerW:"Ma Rene Rocabado",  ownerL:"Aldo Velasco" },
+  { date:"20 Jun", group:"E", flagH:"🇪🇨", teamH:"Ecuador",         gh:0, gv:0, flagV:"🇨🇼", teamV:"Curazao",           type:"DRAW", winner:null,              ownerW:"—",                 ownerL:"—" },
+  { date:"20 Jun", group:"F", flagH:"🇳🇱", teamH:"Países Bajos",    gh:5, gv:1, flagV:"🇸🇪", teamV:"Suecia",            type:"WIN",  winner:"Países Bajos",    ownerW:"Jaqueline Bell",    ownerL:"Saul Ortiz" },
+  { date:"20 Jun", group:"F", flagH:"🇯🇵", teamH:"Japón",           gh:4, gv:0, flagV:"🇹🇳", teamV:"Túnez",             type:"WIN",  winner:"Japón",           ownerW:"Dora Vaca",         ownerL:"Miolet Padilla" },
+  { date:"21 Jun", group:"G", flagH:"🇧🇪", teamH:"Bélgica",         gh:0, gv:0, flagV:"🇮🇷", teamV:"Irán",              type:"DRAW", winner:null,              ownerW:"Sonia Antelo",      ownerL:"Fernando Montenegro" },
+  { date:"21 Jun", group:"G", flagH:"🇪🇬", teamH:"Egipto",          gh:3, gv:1, flagV:"🇳🇿", teamV:"Nueva Zelanda",     type:"WIN",  winner:"Egipto",          ownerW:"Stefan Fleig",      ownerL:"Yoselin Rodriguez" },
+  { date:"22 Jun", group:"I", flagH:"🇫🇷", teamH:"Francia",         gh:3, gv:0, flagV:"🇮🇶", teamV:"Iraq",              type:"WIN",  winner:"Francia",         ownerW:"Alejandro Pastrana",ownerL:"—" },
+  { date:"22 Jun", group:"I", flagH:"🇳🇴", teamH:"Noruega",         gh:3, gv:0, flagV:"🇸🇳", teamV:"Senegal",           type:"WIN",  winner:"Noruega",         ownerW:"Ricardo Moro",      ownerL:"Fabio Vega" },
+  { date:"22 Jun", group:"J", flagH:"🇦🇷", teamH:"Argentina",       gh:3, gv:1, flagV:"🇦🇹", teamV:"Austria",           type:"WIN",  winner:"Argentina",       ownerW:"Claudia Ucedo",     ownerL:"Juan Tavolara" },
+  { date:"22 Jun", group:"J", flagH:"🇩🇿", teamH:"Argelia",         gh:2, gv:0, flagV:"🇯🇴", teamV:"Jordania",          type:"WIN",  winner:"Argelia",         ownerW:"—",                 ownerL:"—" },
+  // ── JORNADA 3 ──
+  { date:"24 Jun", group:"A", flagH:"🇲🇽", teamH:"México",          gh:3, gv:0, flagV:"🇨🇿", teamV:"Chequia",           type:"WIN",  winner:"México",          ownerW:"Fabrizio Amelunge", ownerL:"—" },
+  { date:"24 Jun", group:"A", flagH:"🇿🇦", teamH:"Sudáfrica",       gh:1, gv:0, flagV:"🇰🇷", teamV:"Corea del Sur",     type:"WIN",  winner:"Sudáfrica",       ownerW:"Diego Bravo",       ownerL:"Oscar Careaga" },
+  { date:"24 Jun", group:"B", flagH:"🇨🇭", teamH:"Suiza",           gh:3, gv:1, flagV:"🇨🇦", teamV:"Canadá",            type:"WIN",  winner:"Suiza",           ownerW:"Julio Pinto",       ownerL:"Mario Llado" },
+  { date:"24 Jun", group:"B", flagH:"🇧🇦", teamH:"Bosnia Herz.",    gh:3, gv:1, flagV:"🇶🇦", teamV:"Qatar",             type:"WIN",  winner:"Bosnia Herz.",    ownerW:"—",                 ownerL:"Humberto Villena" },
+  { date:"24 Jun", group:"C", flagH:"🏴󠁧󠁢󠁳󠁣󠁴󠁿", teamH:"Escocia",         gh:0, gv:3, flagV:"🇧🇷", teamV:"Brasil",            type:"WIN",  winner:"Brasil",          ownerW:"Stephany Saavedra", ownerL:"Ana Luz Caballero" },
+  { date:"24 Jun", group:"C", flagH:"🇲🇦", teamH:"Marruecos",       gh:4, gv:2, flagV:"🇭🇹", teamV:"Haití",             type:"WIN",  winner:"Marruecos",       ownerW:"Nikcole Rojas",     ownerL:"—" },
+  { date:"25 Jun", group:"D", flagH:"🇹🇷", teamH:"Turquía",         gh:3, gv:2, flagV:"🇺🇸", teamV:"Estados Unidos",    type:"WIN",  winner:"Turquía",         ownerW:"Daniel Carvajal",   ownerL:"Pablo Barrientos" },
+  { date:"25 Jun", group:"D", flagH:"🇵🇾", teamH:"Paraguay",        gh:0, gv:0, flagV:"🇦🇺", teamV:"Australia",         type:"DRAW", winner:null,              ownerW:"Gabriela Fresco",   ownerL:"Ibrahim Abdev" },
+  { date:"25 Jun", group:"E", flagH:"🇪🇨", teamH:"Ecuador",         gh:2, gv:1, flagV:"🇩🇪", teamV:"Alemania",          type:"WIN",  winner:"Ecuador",         ownerW:"—",                 ownerL:"Ma Rene Rocabado" },
+  { date:"25 Jun", group:"E", flagH:"🇨🇼", teamH:"Curazao",         gh:0, gv:2, flagV:"🇨🇮", teamV:"Costa de Marfil",   type:"WIN",  winner:"Costa de Marfil", ownerW:"Aldo Velasco",      ownerL:"—" },
+  { date:"25 Jun", group:"F", flagH:"🇯🇵", teamH:"Japón",           gh:1, gv:1, flagV:"🇸🇪", teamV:"Suecia",            type:"DRAW", winner:null,              ownerW:"Dora Vaca",         ownerL:"Saul Ortiz" },
+  { date:"25 Jun", group:"F", flagH:"🇳🇱", teamH:"Países Bajos",    gh:3, gv:1, flagV:"🇹🇳", teamV:"Túnez",             type:"WIN",  winner:"Países Bajos",    ownerW:"Jaqueline Bell",    ownerL:"Miolet Padilla" },
+];
+
+/* ── DATA: TABLA SORTEO FINAL — 29 Jun ──────── */
+const winners = [
+  // ── 9 PTS (3 victorias) ──────────────────────
+  { flag:"🇲🇽", country:"México",          pts:9,  owner:"Fabrizio Amelunge",   rival:"3 victorias — Líder 🏆", group:"A", status:"✅" },
+  { flag:"🇫🇷", country:"Francia",         pts:9,  owner:"Alejandro Pastrana",  rival:"3 victorias — Líder 🏆", group:"I", status:"✅" },
+  { flag:"🇦🇷", country:"Argentina",       pts:9,  owner:"Claudia Ucedo",       rival:"3 victorias — Líder 🏆", group:"J", status:"✅" },
+  // ── 6 PTS (2 victorias) ──────────────────────
+  { flag:"🇨🇭", country:"Suiza",           pts:6,  owner:"Julio Pinto",         rival:"2 victorias", group:"B", status:"✅" },
+  { flag:"🇧🇷", country:"Brasil",          pts:6,  owner:"Stephany Saavedra",   rival:"2 victorias", group:"C", status:"✅" },
+  { flag:"🇲🇦", country:"Marruecos",       pts:6,  owner:"Nikcole Rojas",       rival:"2 victorias", group:"C", status:"✅" },
+  { flag:"🇺🇸", country:"Estados Unidos",  pts:6,  owner:"Pablo Barrientos",    rival:"2 victorias", group:"D", status:"✅" },
+  { flag:"🇩🇪", country:"Alemania",        pts:6,  owner:"Ma Rene Rocabado",    rival:"2 victorias", group:"E", status:"✅" },
+  { flag:"🇨🇮", country:"Costa de Marfil", pts:6,  owner:"Aldo Velasco",        rival:"2 victorias", group:"E", status:"✅" },
+  { flag:"🇳🇱", country:"Países Bajos",    pts:6,  owner:"Jaqueline Bell",      rival:"2 victorias", group:"F", status:"✅" },
+  { flag:"🇳🇴", country:"Noruega",         pts:6,  owner:"Ricardo Moro",        rival:"2 victorias", group:"I", status:"✅" },
+  { flag:"🇨🇴", country:"Colombia",        pts:6,  owner:"Nancy Perez",         rival:"2 victorias", group:"K", status:"✅" },
+  { flag:"🇪🇸", country:"España",          pts:6,  owner:"Karina Vaca Pereira", rival:"2 victorias", group:"H", status:"✅" },
+  { flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿", country:"Inglaterra",       pts:6,  owner:"Gabriela Pedraza",   rival:"2 victorias", group:"L", status:"✅" },
+  { flag:"🇭🇷", country:"Croacia",         pts:6,  owner:"Fiorela Seoane",      rival:"2 victorias", group:"L", status:"✅" },
+  // ── 3 PTS (1 victoria) ───────────────────────
+  { flag:"🇿🇦", country:"Sudáfrica",       pts:3,  owner:"Diego Bravo",         rival:"1 victoria",  group:"A", status:"✅" },
+  { flag:"🇰🇷", country:"Corea del Sur",   pts:3,  owner:"Oscar Careaga",       rival:"1 victoria",  group:"A", status:"❌" },
+  { flag:"🇨🇦", country:"Canadá",          pts:3,  owner:"Mario Llado",         rival:"1 victoria",  group:"B", status:"✅" },
+  { flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿", country:"Escocia",          pts:3,  owner:"Ana Luz Caballero",  rival:"1 victoria",  group:"C", status:"❌" },
+  { flag:"🇦🇺", country:"Australia",       pts:3,  owner:"Ibrahim Abdev",       rival:"1 victoria",  group:"D", status:"✅" },
+  { flag:"🇵🇾", country:"Paraguay",        pts:3,  owner:"Gabriela Fresco",     rival:"1 victoria",  group:"D", status:"✅" },
+  { flag:"🇹🇷", country:"Turquía",         pts:3,  owner:"Daniel Carvajal",     rival:"1 victoria",  group:"D", status:"❌" },
+  { flag:"🇯🇵", country:"Japón",           pts:3,  owner:"Dora Vaca",           rival:"1 victoria",  group:"F", status:"✅" },
+  { flag:"🇸🇪", country:"Suecia",          pts:3,  owner:"Saul Ortiz",          rival:"1 victoria",  group:"F", status:"✅" },
+  { flag:"🇧🇪", country:"Bélgica",         pts:3,  owner:"Sonia Antelo",        rival:"1 victoria",  group:"G", status:"✅" },
+  { flag:"🇪🇬", country:"Egipto",          pts:3,  owner:"Stefan Fleig",        rival:"1 victoria",  group:"G", status:"✅" },
+  { flag:"🇸🇳", country:"Senegal",         pts:3,  owner:"Fabio Vega",          rival:"1 victoria",  group:"I", status:"✅" },
+  { flag:"🇦🇹", country:"Austria",         pts:3,  owner:"Juan Tavolara",       rival:"1 victoria",  group:"J", status:"✅" },
+  { flag:"🇵🇹", country:"Portugal",        pts:3,  owner:"Jairo Rojas",         rival:"1 victoria",  group:"K", status:"✅" },
+  { flag:"🇨🇩", country:"RD Congo",        pts:3,  owner:"Mariela Amelunge",    rival:"1 victoria",  group:"K", status:"✅" },
+  { flag:"🇬🇭", country:"Ghana",           pts:3,  owner:"Pamela Pinto",        rival:"1 victoria",  group:"L", status:"✅" },
+  // ── 0 PTS (sin victorias — clasificados con empates) ──
+  { flag:"🇨🇻", country:"Cabo Verde",      pts:0,  owner:"Adelita Eguez",       rival:"3 empates — sin victoria", group:"H", status:"✅" },
+];
+
+/* ── SORTEO LOGIC ───────────────────────────── */
+let activeConf = 'ALL';
+
+function buildSorteo() {
+  const grid = document.getElementById('sorteo-grid');
+  grid.innerHTML = '';
+  sorteoData.forEach((d, i) => {
+    const pts = puntosMap[d.country] || 0;
+    const elim = eliminadosSet.has(d.country);
+    const clasif = clasificadosSet.has(d.country);
+    const statusBadge = elim
+      ? '<span class="sbadge badge-elim">❌ ELIMINADO</span>'
+      : clasif
+        ? '<span class="sbadge badge-clasif">✅ CLASIFICADO</span>'
+        : '<span class="sbadge badge-live">⚽ EN JUEGO</span>';
+    const card = document.createElement('div');
+    card.className = 'scard' + (elim ? ' scard-elim' : '');
+    card.dataset.conf = d.conf;
+    card.style.animationDelay = `${i * 25}ms`;
+    card.innerHTML = `
+      <div class="scard-accent ${elim?'acc-elim':'acc-'+d.conf}"></div>
+      <span class="scard-num">#${d.num}</span>
+      <div class="scard-body">
+        <span class="scard-flag" style="${elim?'filter:grayscale(1);opacity:.5':''}">${d.flag}</span>
+        <div class="scard-info">
+          <div class="scard-country">${d.country}</div>
+          <div class="scard-name">👤 ${d.name}</div>
+          <div style="margin-top:4px">${statusBadge}</div>
+        </div>
+      </div>
+      <div class="scard-footer">
+        <span class="scard-rank">📊 FIFA #${d.rank}</span>
+        <span class="scard-pts ${pts>0?'pts-green':'pts-muted'}">${pts>0?'⚡ +'+pts+' pts':'· 0 pts'}</span>
+        <span class="scard-conf conf-${d.conf}">${d.conf}</span>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function filterCards() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  document.querySelectorAll('.scard').forEach(c => {
+    const text = c.innerText.toLowerCase();
+    const confOk = activeConf === 'ALL' || c.dataset.conf === activeConf;
+    const textOk = !q || text.includes(q);
+    c.classList.toggle('hidden', !(confOk && textOk));
+  });
+}
+
+function filterConf(conf, btn) {
+  activeConf = conf;
+  document.querySelectorAll('#panel-sorteo .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterCards();
+}
+
+/* ── RESULTS LOGIC ──────────────────────────── */
+function buildMatches() {
+  const grid = document.getElementById('match-grid');
+  grid.innerHTML = '';
+  matches.forEach((m, i) => {
+    const isWin = m.type==='WIN', isDraw = m.type==='DRAW', isLive = m.type==='LIVE';
+    const hW = isWin && m.winner===m.teamH, vW = isWin && m.winner===m.teamV;
+    const scoreHTML = isLive
+      ? `<span class="score-sep" style="font-size:28px">?&nbsp;·&nbsp;?</span>`
+      : `${m.gh}<span class="score-sep" style="font-size:22px;color:var(--muted);margin:0 3px">—</span>${m.gv}`;
+    const statusLabel = isLive ? '🔴 EN CURSO' : isWin ? '✓ VICTORIA' : '➖ EMPATE';
+    const sClass = isLive ? 's-live' : isWin ? 's-win' : 's-draw';
+    const topClass = isLive ? 'top-live' : isWin ? 'top-win' : 'top-draw';
+    const ownerLine = isWin
+      ? `${m.ownerW} · ${m.ownerL!=='—'?m.ownerL+' elim':'rival sin part.'}`
+      : `${m.ownerW!=='—'?m.ownerW:'—'} · ${m.ownerL!=='—'?m.ownerL:'—'}`;
+    const card = document.createElement('div');
+    card.className = 'mcard'; card.dataset.type = m.type;
+    card.style.animationDelay = `${i*22}ms`;
+    card.innerHTML = `
+      <div class="mcard-top ${topClass}"></div>
+      <div class="mcard-header">
+        <span class="mcard-date">${m.date}</span>
+        <span class="mcard-group">GRUPO ${m.group}</span>
+      </div>
+      <div class="mcard-score">
+        <div class="mcard-team">
+          <span class="mcard-flag">${m.flagH}</span>
+          <span class="mcard-tname ${hW?'winner':isDraw?'':'loser'}">${m.teamH}</span>
+        </div>
+        <div class="score-center">
+          <div class="score-nums">${scoreHTML}</div>
+          <span class="score-status ${sClass}">${statusLabel}</span>
+        </div>
+        <div class="mcard-team">
+          <span class="mcard-flag">${m.flagV}</span>
+          <span class="mcard-tname ${vW?'winner':isDraw?'':'loser'}">${m.teamV}</span>
+        </div>
+      </div>
+      <div class="mcard-footer">
+        <span class="mcard-pts ${isWin?'pts-pos':'pts-none'}">${isWin?'⚡ +3 pts al ganador':'— sin puntos'}</span>
+        <span class="mcard-owner">👥 ${ownerLine}</span>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function buildWinners() {
+  const grid = document.getElementById('winners-grid');
+  grid.innerHTML = '';
+  winners.forEach((w, i) => {
+    const card = document.createElement('div');
+    card.className = 'wcard';
+    card.style.animationDelay = `${i*30}ms`;
+    card.innerHTML = `
+      <div class="wcard-accent"></div>
+      <div class="wcard-body">
+        <span class="wcard-flag">${w.flag}</span>
+        <div class="wcard-info">
+          <div class="wcard-country">${w.country}</div>
+          <div class="wcard-owner">👤 ${w.owner}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="wcard-pts">+${w.pts}</div>
+          <div class="wcard-pts-label">PUNTOS</div>
+        </div>
+      </div>
+      <div class="wcard-footer">
+        <span class="wcard-rival">${w.rival}</span>
+        <span class="wbadge">${w.status} GRP ${w.group}</span>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function filterMatches(type, btn) {
+  document.querySelectorAll('#panel-resultados .filter-btn').forEach(b => {
+    b.classList.remove('active','f-win','f-draw','f-live');
+  });
+  if (type==='ALL')  btn.classList.add('active');
+  if (type==='WIN')  btn.classList.add('f-win');
+  if (type==='DRAW') btn.classList.add('f-draw');
+  if (type==='LIVE') btn.classList.add('f-live');
+  document.querySelectorAll('.mcard').forEach(c => {
+    c.classList.toggle('hidden', type!=='ALL' && c.dataset.type!==type);
+  });
+}
+
+/* ── TAB SWITCHING ──────────────────────────── */
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-'+name).classList.add('active');
+}
+
+/* ── ELIMINADOS DATA & LOGIC ─────────────────── */
+const eliminadosData = [
+  { flag:"🇶🇦", country:"Qatar",          owner:"Humberto Villena",    pts:0, group:"B", num:27 },
+  { flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿", country:"Escocia",        owner:"Ana Luz Caballero",   pts:3, group:"C", num:26 },
+  { flag:"🇰🇷", country:"Corea del Sur",  owner:"Oscar Careaga",       pts:3, group:"A", num:13 },
+  { flag:"🇹🇷", country:"Turquía",        owner:"Daniel Carvajal",     pts:3, group:"D", num:31 },
+  { flag:"🇹🇳", country:"Túnez",          owner:"Miolet Padilla",      pts:0, group:"F", num:24 },
+  { flag:"🇮🇷", country:"Irán",           owner:"Fernando Montenegro", pts:0, group:"G", num:15 },
+  { flag:"🇳🇿", country:"Nueva Zelanda",  owner:"Yoselin Rodriguez",   pts:0, group:"G", num:3  },
+  { flag:"🇺🇾", country:"Uruguay",        owner:"Tatiana Eguez",       pts:0, group:"H", num:33 },
+  { flag:"🇸🇦", country:"Arabia Saudita", owner:"Sergio Amelunge",     pts:0, group:"H", num:36 },
+  { flag:"🇺🇿", country:"Uzbekistán",     owner:"Dulce Terceros",      pts:0, group:"K", num:37 },
+  { flag:"🇵🇦", country:"Panamá",         owner:"Roberto Gutierrez",   pts:0, group:"L", num:34 },
+];
+
+function buildElim() {
+  const grid = document.getElementById('elim-grid');
+  if (grid.innerHTML !== '') return;
+  eliminadosData.forEach((e, i) => {
+    const hasPts = e.pts > 0;
+    const card = document.createElement('div');
+    card.className = 'ecard';
+    card.style.animationDelay = `${i * 40}ms`;
+    card.innerHTML = `
+      <div class="ecard-top"></div>
+      <div class="ecard-body">
+        <span class="ecard-flag">${e.flag}</span>
+        <div class="ecard-info">
+          <div class="ecard-country">${e.country}</div>
+          <div class="ecard-name">👤 ${e.owner} &nbsp;·&nbsp; #${e.num}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="ecard-pts">${hasPts ? '+'+e.pts : '0'}</div>
+          <div class="ecard-pts-label">PTS SORTEO</div>
+        </div>
+      </div>
+      <div class="ecard-footer">
+        <span class="ecard-group">Grupo ${e.group} · Fase de grupos</span>
+        ${hasPts
+          ? `<span class="ebadge ebadge-pts">⚡ ${e.pts} pts acumulados</span>`
+          : `<span class="ebadge">❌ Sin puntos</span>`}
+      </div>
+      <div style="padding:8px 16px 10px;font-size:11px;color:var(--blue);font-weight:700;letter-spacing:1px;background:#EEF3FF;text-align:center">
+        🔄 REENGANCHE DISPONIBLE — puede unirse a cualquier selección activa
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+let showingElim = false;
+function showElim(btn) {
+  showingElim = !showingElim;
+  document.getElementById('res-main').style.display = showingElim ? 'none' : 'block';
+  document.getElementById('elim-section').style.display = showingElim ? 'block' : 'none';
+  // reset other filter buttons
+  document.querySelectorAll('#panel-resultados .filter-btn').forEach(b => {
+    b.classList.remove('active','f-win','f-draw','f-live','active-elim');
+  });
+  if (showingElim) {
+    btn.classList.add('active-elim');
+    buildElim();
+  } else {
+    document.querySelector('#panel-resultados .filter-btn').classList.add('active');
+  }
+}
+
+/* ── INIT ───────────────────────────────────── */
+buildSorteo();
+buildMatches();
+buildWinners();
+</script>
+</body>
+</html>
